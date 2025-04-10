@@ -1,0 +1,100 @@
+/* Estilo raíz */
+.root {
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-background-color: #f5f5f5; /* Fondo claro y limpio */
+}
+
+/* Estilo de texto */
+Text {
+    -fx-font-size: 16px; /* Tamaño de fuente más pequeño */
+    -fx-font-weight: normal; /* Sin negrita */
+    -fx-fill: #333333; /* Color de texto oscuro para buen contraste */
+}
+
+/* Estilo combo */
+ComboBox {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 35px;
+    -fx-font-size: 14px;
+    -fx-background-color: white; /* Fondo blanco */
+    -fx-text-fill: #333333; /* Texto oscuro */
+    -fx-font-weight: normal;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #cccccc; /* Borde gris claro */
+    -fx-border-width: 1px;
+}
+
+/* Estilo de los elementos del ComboBox */
+ComboBox .list-cell {
+    -fx-background-color: white; /* Fondo blanco */
+    -fx-text-fill: #333333; /* Texto oscuro */
+}
+
+/* Estilo de los elementos seleccionados del ComboBox */
+ComboBox .list-cell:selected {
+    -fx-background-color: #e0e0e0; /* Fondo gris claro para el ítem seleccionado */
+    -fx-text-fill: #333333; /* Texto oscuro en ítem seleccionado */
+}
+
+/* Campos de texto y contraseña */
+.text-field, .password-field {
+    -fx-pref-height: 35px;
+    -fx-pref-width: 240px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #cccccc; /* Borde gris claro */
+    -fx-border-width: 1px;
+    -fx-background-color: white; /* Fondo blanco */
+    -fx-padding: 10px;
+    -fx-text-fill: #333333; /* Texto oscuro */
+}
+
+/* Estilo de campos de texto enfocados */
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #e60000; /* Color rojo para el borde enfocado */
+}
+
+/* Botones */
+.button {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 35px;
+    -fx-font-size: 14px;
+    -fx-background-color: #e60000; /* Color rojo */
+    -fx-text-fill: white; /* Texto blanco */
+    -fx-font-weight: normal;
+    -fx-background-radius: 5;
+    -fx-cursor: hand; /* Cursor de mano para interacción */
+    -fx-transition: all 0.3s ease-in-out; /* Transición suave */
+}
+
+/* Hover para botones */
+.button:hover {
+    -fx-background-color: #b30000; /* Color rojo más oscuro al pasar el cursor */
+}
+
+/* Estilo de mensaje de error */
+#textMensaje {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-fill: #d9534f; /* Color rojo para errores */
+    -fx-text-fill: #d9534f;
+}
+
+/* Estilos específicos de botones */
+#openAceptarButton {
+    -fx-pref-width: 130px;
+    -fx-pref-height: 35px;
+}
+
+#openRegistrarButton {
+    -fx-pref-width: 180px;
+    -fx-pref-height: 35px;
+}
+
+#buttonRecuperarContrasenia {
+    -fx-pref-width: 220px;
+    -fx-pref-height: 35px;
+}
