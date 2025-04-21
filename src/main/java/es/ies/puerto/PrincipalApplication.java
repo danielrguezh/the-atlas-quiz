@@ -20,9 +20,9 @@ public class PrincipalApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         String css = this.getClass().getResource("css/style.css").toExternalForm();
         scene.getStylesheets().add(css);
-        Image icon = new Image(getClass().getResource("/es/ies/puerto/img/ahorcado.png").toExternalForm());
+        Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
         stage.getIcons().add(icon);
-        stage.setTitle("Juego del Ahorcado");
+        stage.setTitle("The Atlas Quiz");
         stage.setScene(scene);
         stage.show();
     }

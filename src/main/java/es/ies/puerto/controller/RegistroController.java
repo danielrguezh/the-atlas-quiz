@@ -34,13 +34,7 @@ public class RegistroController extends AbstractController{
     private PasswordField textFieldPasswordRepit;
 
     @FXML 
-    private TextField textFieldNombre;
-
-    @FXML 
     private TextField textFieldEmail;
-
-    @FXML 
-    private TextField textFieldEmailRepit;
 
     @FXML 
     private Text textMensaje;
@@ -67,7 +61,6 @@ public class RegistroController extends AbstractController{
         if (usuario != null) {
             this.usuarioEditado = usuario;
             textFieldUsuario.setText(usuario.getUser());
-            textFieldNombre.setText(usuario.getName());
             textFieldEmail.setText(usuario.getEmail());
         }
     }
@@ -86,15 +79,6 @@ public class RegistroController extends AbstractController{
         if (textFieldPassword == null ||  textFieldPassword.getText().isEmpty() 
             || textFieldPasswordRepit == null || textFieldPasswordRepit.getText().isEmpty()) {
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorPasswordVacio"));
-            return;
-        }
-        if (textFieldNombre == null || textFieldNombre.getText().isEmpty()) {
-            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorNombreVacio"));
-            return;
-        }
-        if (textFieldEmail == null ||  textFieldEmail.getText().isEmpty() 
-            || textFieldEmailRepit == null || textFieldEmailRepit.getText().isEmpty()) {
-            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEmailVacio"));
             return;
         }
         if (textFieldPassword.getText().length() < 8) {

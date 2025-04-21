@@ -8,14 +8,14 @@ CREATE TABLE usuarios (
     email TEXT NOT NULL UNIQUE,
     name TEXT NOT NULL,
     password TEXT NOT NULL,
+    country INTEGER NOT NULL, 
     puntos INTEGER DEFAULT 0,
-    victorias INTEGER DEFAULT 0,
-    id_nivel INTEGER NOT NULL,  
+    victorias INTEGER DEFAULT 0, 
     FOREIGN KEY (id_nivel) REFERENCES niveles(id)  
 );
 
 CREATE INDEX idx_email ON usuarios (email);
-
+-- nada que ver
 INSERT INTO usuarios (user, email, name, password, id_nivel) VALUES 
     ('Usuario-1', 'email1@example.com', 'Nombre1', 'contraseña123', 1),
     ('Usuario-2', 'email2@example.com', 'Nombre2', 'abc456', 1),

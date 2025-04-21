@@ -63,7 +63,6 @@ public class LoginController extends AbstractController{
     public void initialize() {
         comboIdioma.getItems().add("es");
         comboIdioma.getItems().add("en");
-        comboIdioma.getItems().add("fr");
         String idioma = ConfigManager.ConfigProperties.getIdiomaActual();
         comboIdioma.setValue(idioma);
         cargarIdioma(idioma);
@@ -83,7 +82,6 @@ public class LoginController extends AbstractController{
         ConfigManager.ConfigProperties.setIdiomaActual(idioma);
         cargarIdioma(idioma);
         cambiarIdioma();
-        actualizarTituloVentana();
     }
 
     /**
@@ -93,15 +91,6 @@ public class LoginController extends AbstractController{
     private void cargarIdioma(String idioma) {
         String path = pathFichero+ficheroStr+idioma+".properties";
         ConfigManager.ConfigProperties.setPath(path);
-    }
-
-    /**
-     * Actualiza dinamicamente el titulo de la ventana principal
-     */
-    public void actualizarTituloVentana() {
-        Stage stage = (Stage) textUsuarioEmail.getScene().getWindow(); 
-        String titulo = ConfigManager.ConfigProperties.getProperty("loginTitle");
-        stage.setTitle(titulo);
     }
 
     /**
