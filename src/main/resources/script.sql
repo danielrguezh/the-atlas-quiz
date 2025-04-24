@@ -1,9 +1,7 @@
 DROP TABLE IF EXISTS users;
 
-DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS preguntas;
 
-DROP INDEX IF EXISTS idx_email;
-;
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user TEXT NOT NULL UNIQUE,
@@ -14,13 +12,13 @@ CREATE TABLE users (
     rank TEXT NOT NULL
 );
 
-INSERT INTO users (user, email, password, country, level, rank)
-VALUES ('admin', 'admin@example.com', '1234', 've', 0, 'BEGINNER'),
-VALUES ('john_doe', 'john@example.com', '12345', 'us', 10, 'BEGINNER'),
-VALUES ('alice_w', 'alice@example.com', 'pass123', 'ca', 15, 'BEGINNER'),
-VALUES ('bob_the_builder', 'bob@build.com', 'canwefixit', 'gb', 20, 'BEGINNER'),
-VALUES ('lucy_queen', 'lucy@shine.org', 'crownme', 'es', 25, 'BEGINNER'),
-VALUES ('nina_x', 'nina@nowhere.com', 'securepass', 'de', 5, 'BEGINNER');
+INSERT INTO users (user, email, password, country, level, rank) VALUES
+('admin', 'admin@example.com', '1234', 've', 0, 'BEGINNER'),
+('john_doe', 'john@example.com', '12345', 'us', 10, 'BEGINNER'),
+('alice_w', 'alice@example.com', 'pass123', 'ca', 15, 'BEGINNER'),
+('bob_the_builder', 'bob@build.com', 'canwefixit', 'gb', 20, 'BEGINNER'),
+('lucy_queen', 'lucy@shine.org', 'crownme', 'es', 25, 'BEGINNER'),
+('nina_x', 'nina@nowhere.com', 'securepass', 'de', 5, 'BEGINNER');
 
 
 CREATE TABLE preguntas (

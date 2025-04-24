@@ -17,7 +17,7 @@ public class ConfigManager {
 
         static String path;
         private static final Properties properties = new Properties();
-        private static String idiomaActual = "es"; 
+        private static String idiomaActual = "es";
         
         static {
 

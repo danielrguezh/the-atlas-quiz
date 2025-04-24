@@ -8,17 +8,22 @@ import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.QuestionEntity;
 import es.ies.puerto.model.entities.Rank;
 import es.ies.puerto.model.entities.UserEntity;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 /**
  * @author danielrguezh
  * @version 1.0.0
  */
-public class JuegoController extends AbstractController{
+public class JuegoController extends ProfileController{
+    private QuestionEntity preguntaEntity;
+
 
     @FXML
     private Text textUsuarioMostrar;
@@ -42,7 +47,7 @@ public class JuegoController extends AbstractController{
     private Text textPalabra;
 
     @FXML
-    private TextField textFieldLetra;
+    private TextField answerTextField;
 
     @FXML
     private Text textMensaje;
@@ -56,27 +61,20 @@ public class JuegoController extends AbstractController{
     @FXML
     private Button buttonVolverAtras;
 
-    private String usernameSinPrefijo;
-    private int nivelUsuario;
-    private int puntosUsuario;
-    private String emailUsuario;
-    private String palabraSecreta;   
-    private char[] estadoPalabra;    
-    private int intentosRestantes; 
-    private StringBuilder letrasUtilizadas;
-    private int victorias = 0;
-    private final int umbralVictorias = 3;
+    Timeline timeline;
+    int segundosRespuesta;
 
     @FXML
     public void initialize() {
         cambiarIdioma();
+        cargarDatosUsuario(player);
+        iniciarJuego();
     }
 
     /**
      * Metodo que carga los datos de usuario
      * @param usuario
-     */
-    public void cargarDatosUsuario(UserEntity usuario) {
+     * public void cargarDatosUsuario(UserEntity usuario) {
         if (usuario != null) {
             textUsuarioMostrar.setText( usuario.getUser());
             textLevel.setText("Nivel: " + usuario.getLevel());
@@ -84,35 +82,89 @@ public class JuegoController extends AbstractController{
             iniciarJuego();
         }
     }
+     */
+    
 
     /**
      * Metodo que inicializa el juego
      */
     private void iniciarJuego() {
-        cargarPalabraAleatoria(obtenerNivelUsuario());  
-        intentosRestantes = 9; 
-        estadoPalabra = new char[palabraSecreta.length()];
-        for (int i = 0; i < estadoPalabra.length; i++) {
-            estadoPalabra[i] = '_';
-        }
-        textPalabra.setText(formatearEstadoPalabra());
-        textIntentos.setText("Intentos: " + intentosRestantes);
-        textMensaje.setText("");
-        textMensaje.setStyle("-fx-fill: red;");
-        letrasUtilizadas = new StringBuilder();
-        textLetrasUsadas.setText("Letras usadas: ");
-        limpiarCanvas();
-        dibujarAhorcado(); 
+        cargarPreguntaAleatoria(categoryString);
+        
     }
     
 
-    private void cargarPalabraAleatoria(String categoria) {
+    private void cargarPreguntaAleatoria(String categoria) {
         try {
-            List<QuestionEntity> palabras = getQuestionService().obtenerPreguntaAleatoriaPorCategoria(categoria, Rank.valueOf(textRank.toString()));
-            if (!palabras.isEmpty()) {
-                this.palabraSecreta = palabras.get(0).getDescription();
+            List<QuestionEntity> preguntas = getQuestionService().obtenerPreguntaAleatoriaPorCategoria(categoria, Rank.valueOf(textRank.toString()));
+            if (!preguntas.isEmpty()) {
+               preguntaEntity = preguntas.get(0);
+               questionDescriptionText.setText(preguntaEntity.getDescription());
             } else {
-                this.palabraSecreta = "";
+                questionDescriptionText.setText("No se han encontrado preguntas validas para su rango, vuelva a inentarlo o juegue otro modo para subir de rango");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+    * Metodo para iniciar el temporizador
+    * Se encarga de iniciar el temporizador y actualizar el tiempo transcurrido cada segundo
+    */
+    private void EmpezarTiempo() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(100), e -> {
+            segundosRespuesta--;
+            actualizarTemporizador();
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    /**
+    * Metodo para actualizar el temporizador
+    */
+    private void actualizarTemporizador() {
+        int segundos = segundosRespuesta % 60;
+        labelTimer.setText(segundos+ " s");
+    }
+
+    /**
+    * Metodo para detener el temporizador
+    */
+    private void pararTemporizador() {
+        if (timeline != null) {
+            timeline.stop();
+        }
+    }
+
+    @FXML
+    protected void onInsertarClick(){
+        if (answerTextField.getText().contains(preguntaEntity.getAnswer())) {
+            pararTemporizador();
+            textMensaje.setText("Respuesta correcta.");
+        }
+        textMensaje.setText("Respuesta incorrecta.");
+    }
+
+    /**
+     * Metodo que reinicia la pantalla
+     */
+    @FXML
+    protected void onReiniciarClick() {
+        iniciarJuego();
+    }
+
+    /**
+     * Metodo que redirige a la pantalla de profile
+     */
+    @FXML
+    protected void onVolverAtrasClick() {
+        try {
+            List<UserEntity> usuarios = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textUsuarioMostrar.getText());
+            if (!usuarios.isEmpty()) {
+                UserEntity usuario = usuarios.get(0);
+                mostrarPantalla(buttonVolverAtras, "profile.fxml", usuario);
             }
         } catch (SQLException e) {
             e.printStackTrace();

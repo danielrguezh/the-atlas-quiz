@@ -21,7 +21,11 @@ import javafx.scene.text.Text;
  */
 
 public class ProfileController extends AbstractController {
-    String categotyString;
+    String categoryString;
+    UserEntity player;
+
+    @FXML
+    ImageView userImageView;
 
     @FXML
     private Text textUsuarioMostrar;
@@ -32,14 +36,25 @@ public class ProfileController extends AbstractController {
     @FXML
     private Text textRank;
 
+    
     @FXML
-    ImageView userImageView;
+    private Button capitalesButton;
+
+    @FXML
+    private Button banderasButton;
+
+    @FXML
+    private Button poblacionButton;
+
+    @FXML
+    private Button pibButton;
+
+    @FXML
+    private Button pibPCButton;
+
 
     @FXML
     private Button openEditarButton;
-
-    @FXML
-    private Button openJugarButton;
 
     @FXML
     private Button buttonVolverAtras;
@@ -50,14 +65,16 @@ public class ProfileController extends AbstractController {
     @FXML
     public void initialize() {
         cambiarIdioma();
+        
     }
 
     /**
-     * Carga los datos del usuario en los campos de la interfaz grafica 
+     * Carga los datos del usuario en los campos de la interfaz grafica
      * @param usuario con los datos que se mostraran en pantalla
      */
     public void cargarDatosUsuario(UserEntity usuario) {
         if (usuario != null) {
+            player=usuario;
             textUsuarioMostrar.setText(usuario.getUser());
             textLevel.setText(String.valueOf(usuario.getLevel()));
             textRank.setText(usuario.getRank().toString());
@@ -72,41 +89,45 @@ public class ProfileController extends AbstractController {
         }
     }
 
-    protected void boton1() {
-        categotyString="capitales";
-        openJugarClick();
+    @FXML
+    protected void onCapitales() {
+        categoryString="capitales";
+        selectGame(capitalesButton);
     }
 
-    protected void boton2() {
-        categotyString="banderas";
-        openJugarClick();
+    @FXML
+    protected void onBanderas() {
+        categoryString="banderas";
+        selectGame(banderasButton);
     }
 
-    protected void boton1() {
-        categotyString="capitales";
-        openJugarClick();
+    @FXML
+    protected void onPoblacion() {
+        categoryString="capitales";
+        selectGame(poblacionButton);
     }
 
-    protected void boton1() {
-        categotyString="capitales";
-        openJugarClick();
+    @FXML
+    protected void onPib() {
+        categoryString="capitales";
+        selectGame(pibButton);
     }
 
-    protected void boton1() {
-        categotyString="capitales";
-        openJugarClick();
+    @FXML
+    protected void onPibPC() {
+        categoryString="capitales";
+        selectGame(pibPCButton);
     }
 
     /** 
      * Metodo que redirige a la pantalla de juego
      */
-    @FXML
-    protected void openJugarClick() {
+    protected void selectGame(Button button) {
         try {
             List<UserEntity> usuarios = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textUsuarioMostrar.getText());
             if (!usuarios.isEmpty()) {
                 UserEntity usuario = usuarios.get(0);
-                mostrarPantalla(buttonVolverAtras, "juego.fxml", usuario);
+                mostrarPantalla(button, "juego.fxml", usuario);
             }
         } catch (SQLException e) {
             e.printStackTrace();

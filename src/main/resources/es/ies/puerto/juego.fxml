@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="350.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.JuegoController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="380.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.JuegoController">
    <children>
       <ImageView fitHeight="241.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -50,10 +50,11 @@
                   </Text>
                </children>
             </VBox>
-            <Label fx:id="labelTimer" alignment="TOP_RIGHT" text="100 s" textFill="#b72b2b">
+            <Label fx:id="labelTimer" alignment="TOP_RIGHT" prefHeight="35.0" prefWidth="55.0" text="100 s" textFill="#b72b2b">
                <font>
-                  <Font name="System Bold Italic" size="28.0" />
-               </font></Label>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
          </children>
          <VBox.margin>
             <Insets top="20.0" />
@@ -64,14 +65,14 @@
             <Image url="@img/icon.png" />
          </image>
       </ImageView>
-      <Text fx:id="questionDescriptionText" text="Pregunta:" wrappingWidth="87.15893602371216">
+      <Text fx:id="questionDescriptionText" text="Pregunta:" wrappingWidth="111.15893602371216">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
       <TextField fx:id="answerTextField" alignment="CENTER" prefHeight="25.0" prefWidth="237.0" promptText="Ex: Antartica" />
       <Text fx:id="textMensaje" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Button fx:id="insertarButton" mnemonicParsing="false" onAction="#onInsertarClick" prefHeight="27.0" prefWidth="57.0" text="Insertar" />
+      <Button fx:id="insertarButton" mnemonicParsing="false" onAction="#onInsertarClick" prefHeight="27.0" prefWidth="88.0" text="Insertar" />
       <Button fx:id="reiniciarButton" mnemonicParsing="false" onAction="#onReiniciarClick" text="Cambiar pregunta" />
       <Button fx:id="buttonVolverAtras" mnemonicParsing="false" onAction="#onVolverAtrasClick" text="Volver Atrás" />
    </children>

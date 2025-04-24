@@ -38,7 +38,7 @@ public class UserService extends Conexion{
      * @throws SQLException
      */
     public List<UserEntity> obtenerUsuarioPorEmailOUser(String input) throws SQLException {
-        String sql = "SELECT * FROM usuarios " + "WHERE email=? OR user=?";
+        String sql = "SELECT * FROM users " + "WHERE email=? OR user=?";
         return obtenerUsuario(sql, input, input);
     }
 
@@ -49,7 +49,7 @@ public class UserService extends Conexion{
      * @throws SQLException
      */
     public List<UserEntity> obtenerUsuarioPorInput(String input) throws SQLException {
-        String sql = "SELECT * FROM usuarios " + "WHERE email=? OR user=? OR name=? OR id=?";
+        String sql = "SELECT * FROM users " + "WHERE email=? OR user=? OR name=? OR id=?";
         return obtenerUsuario(sql, input, input, input, input);
     }
     
@@ -59,7 +59,7 @@ public class UserService extends Conexion{
      * @throws SQLException
      */
     public List<UserEntity> obtenerUsuarios() throws SQLException{
-        String sql = "SELECT * FROM usuarios";
+        String sql = "SELECT * FROM users";
         return obtenerUsuario(sql);
     }
 
@@ -120,7 +120,7 @@ public class UserService extends Conexion{
      * @throws SQLException
      */
     public boolean insertarUsuario(UserEntity usuario) throws SQLException {
-        String sql = "INSERT INTO usuarios (user, email, password, country, level, rank) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (user, email, password, country, level, rank) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
             sentencia.setString(1, usuario.getUser());
             sentencia.setString(2, usuario.getEmail());
@@ -139,7 +139,7 @@ public class UserService extends Conexion{
     }
 
     public boolean actualizarUsuario(UserEntity usuario) throws SQLException {
-        String sql = "UPDATE usuarios SET user = ?, email = ?,  password = ?, country = ?, level = ?, rank = ? WHERE id = ?";
+        String sql = "UPDATE users SET user = ?, email = ?,  password = ?, country = ?, level = ?, rank = ? WHERE id = ?";
         try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
             sentencia.setString(1, usuario.getUser());
             sentencia.setString(2, usuario.getEmail());
@@ -159,7 +159,7 @@ public class UserService extends Conexion{
     }
 
     public boolean updateLevel(int level, String email) throws SQLException {
-        String sql = "UPDATE usuarios SET level = ?, WHERE email = ?";
+        String sql = "UPDATE users SET level = ?, WHERE email = ?";
         try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
             sentencia.setInt(1, level);
             sentencia.setString(2, email);
@@ -174,7 +174,7 @@ public class UserService extends Conexion{
     }
 
     public boolean updateRank(String nivel, String email) throws SQLException {
-        String sql = "UPDATE usuarios SET id_nivel = ? WHERE email = ?";
+        String sql = "UPDATE users SET id_nivel = ? WHERE email = ?";
         try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
             sentencia.setString(1, nivel);
             sentencia.setString(2, email);

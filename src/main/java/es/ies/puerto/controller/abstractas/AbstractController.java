@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 
 public abstract class AbstractController {
 
-    static final String PATH_DB = "src/main/resources/usuarios.db";
+    static final String PATH_DB = "src/main/resources/atlas.db";
     private UserService usuarioServiceSqlite;
     private QuestionService questionService;
     
