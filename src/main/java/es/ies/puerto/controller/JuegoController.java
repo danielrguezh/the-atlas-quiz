@@ -1,5 +1,6 @@
 package es.ies.puerto.controller;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -39,6 +42,9 @@ public class JuegoController extends ProfileController{
 
     @FXML
     private Text textIntentos;
+
+    @FXML
+    private ImageView questionImageView; 
 
     @FXML
     private Text questionDescriptionText;
@@ -67,7 +73,6 @@ public class JuegoController extends ProfileController{
     @FXML
     public void initialize() {
         cambiarIdioma();
-        cargarDatosUsuario(player);
         iniciarJuego();
     }
 
@@ -89,16 +94,27 @@ public class JuegoController extends ProfileController{
      * Metodo que inicializa el juego
      */
     private void iniciarJuego() {
+        cargarDatosUsuario(player);
         cargarPreguntaAleatoria(categoryString);
         
     }
     
 
+    /**
+     * Metodo que carga una pregunta aleatoria segun categoria y rango
+     * @param categoria
+     */
     private void cargarPreguntaAleatoria(String categoria) {
         try {
             List<QuestionEntity> preguntas = getQuestionService().obtenerPreguntaAleatoriaPorCategoria(categoria, Rank.valueOf(textRank.toString()));
             if (!preguntas.isEmpty()) {
                preguntaEntity = preguntas.get(0);
+               URL imageUrl = getClass().getResource(preguntaEntity.getRutaImagen());
+
+            if (imageUrl != null) {
+                Image image = new Image(imageUrl.toExternalForm());
+                questionImageView.setImage(image);
+            }
                questionDescriptionText.setText(preguntaEntity.getDescription());
             } else {
                 questionDescriptionText.setText("No se han encontrado preguntas validas para su rango, vuelva a inentarlo o juegue otro modo para subir de rango");
@@ -106,13 +122,14 @@ public class JuegoController extends ProfileController{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        empezarTiempo();
     }
 
     /**
     * Metodo para iniciar el temporizador
     * Se encarga de iniciar el temporizador y actualizar el tiempo transcurrido cada segundo
     */
-    private void EmpezarTiempo() {
+    private void empezarTiempo() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(100), e -> {
             segundosRespuesta--;
             actualizarTemporizador();
@@ -133,7 +150,7 @@ public class JuegoController extends ProfileController{
     * Metodo para detener el temporizador
     */
     private void pararTemporizador() {
-        if (timeline != null) {
+        if (timeline != null || segundosRespuesta==0) {
             timeline.stop();
         }
     }
@@ -142,9 +159,52 @@ public class JuegoController extends ProfileController{
     protected void onInsertarClick(){
         if (answerTextField.getText().contains(preguntaEntity.getAnswer())) {
             pararTemporizador();
+            puntuar();
             textMensaje.setText("Respuesta correcta.");
         }
         textMensaje.setText("Respuesta incorrecta.");
+    }
+
+    private void puntuar(){
+        int puntuacion= segundosRespuesta;
+        switch (preguntaEntity.getCategory()) {
+            case "TOURIST":
+                puntuacion= (int) (puntuacion *1.5);
+                break;
+            case "NOMAD":
+                puntuacion= puntuacion *2;
+                break;
+            case "CARTOGRAPHER":
+                puntuacion= puntuacion *3;
+                break;
+            case "CARTOGRAPH_MASTER":
+                puntuacion= puntuacion *5;
+                break;
+            default:
+                break;    
+                 
+        }
+        int newLevel= puntuacion+player.getLevel();
+        player.setLevel(newLevel);
+
+        if (player.getLevel() > 3000 && player.getRank().equals(Rank.BEGINNER)) {
+            player.setRank(player.getRank().rankUp());
+        }
+        if (player.getLevel() > 10000 && player.getRank().equals(Rank.TOURIST)) {
+            player.setRank(player.getRank().rankUp());
+        }
+        if (player.getLevel() > 25000 && player.getRank().equals(Rank.NOMAD)) {
+            player.setRank(player.getRank().rankUp());
+        }
+        if (player.getLevel() > 40000 && player.getRank().equals(Rank.CARTOGRAPHER)) {
+            player.setRank(player.getRank().rankUp());
+        }
+
+        try {
+            getUsuarioServiceSqlite().actualizarUsuario(player);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

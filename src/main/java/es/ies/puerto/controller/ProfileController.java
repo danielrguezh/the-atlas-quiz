@@ -65,6 +65,7 @@ public class ProfileController extends AbstractController {
     @FXML
     public void initialize() {
         cambiarIdioma();
+        cargarDatosUsuario(player);
         
     }
 
@@ -142,8 +143,8 @@ public class ProfileController extends AbstractController {
         try {
             List<UserEntity> usuarios = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textUsuarioMostrar.getText());
             if (!usuarios.isEmpty()) {
-                UserEntity usuario = usuarios.get(0);
-                mostrarPantalla(openEditarButton, "registro.fxml", usuario);
+                player = usuarios.get(0);
+                mostrarPantalla(openEditarButton, "registro.fxml", player);
             }
         } catch (SQLException e) {
             e.printStackTrace();
