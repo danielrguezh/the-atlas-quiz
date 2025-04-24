@@ -86,49 +86,48 @@ public class ProfileController extends AbstractController {
                 Image image = new Image(imageUrl.toExternalForm());
                 userImageView.setImage(image);
             }
-            
         }
     }
 
     @FXML
     protected void onCapitales() {
         categoryString="capitales";
-        selectGame(capitalesButton);
+        selectGame(capitalesButton, categoryString);
     }
 
     @FXML
     protected void onBanderas() {
         categoryString="banderas";
-        selectGame(banderasButton);
+        selectGame(banderasButton, categoryString);
     }
 
     @FXML
     protected void onPoblacion() {
-        categoryString="capitales";
-        selectGame(poblacionButton);
+        categoryString="poblacion";
+        selectGame(poblacionButton, categoryString);
     }
 
     @FXML
     protected void onPib() {
         categoryString="economia";
-        selectGame(pibButton);
+        selectGame(pibButton, categoryString);
     }
 
     @FXML
     protected void onPibPC() {
         categoryString="renta";
-        selectGame(pibPCButton);
+        selectGame(pibPCButton, categoryString);
     }
 
     /** 
      * Metodo que redirige a la pantalla de juego
      */
-    protected void selectGame(Button button) {
+    protected void selectGame(Button button, String category) {
         try {
             List<UserEntity> usuarios = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textUsuarioMostrar.getText());
             if (!usuarios.isEmpty()) {
                 UserEntity usuario = usuarios.get(0);
-                mostrarPantalla(button, "juego.fxml", usuario);
+                mostrarPantalla(button, "juego.fxml", usuario, category);
             }
         } catch (SQLException e) {
             e.printStackTrace();

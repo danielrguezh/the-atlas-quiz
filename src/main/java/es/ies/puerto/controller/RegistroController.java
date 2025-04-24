@@ -57,6 +57,7 @@ public class RegistroController extends AbstractController{
     @FXML
     public void initialize() {
         cambiarIdioma();
+        loadComboBox();
     }
 
     /**
@@ -410,5 +411,6 @@ public class RegistroController extends AbstractController{
         comboSelectCountry.getItems().add("za");
         comboSelectCountry.getItems().add("zm");
         comboSelectCountry.getItems().add("zw");
+
     }
 }

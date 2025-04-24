@@ -68,10 +68,10 @@ public class UsuariosController extends AbstractController{
             String levelRow = ConfigManager.ConfigProperties.getProperty("levelRow");
             String rankRow = ConfigManager.ConfigProperties.getProperty("rankRow");
 
-            String formato = ""+usuarioRow+": %s\n"+countryRow+": %s\n"+levelRow+": %s\n"+countryRow+": %s";
+            String formato = ""+usuarioRow+": %s\n"+countryRow+": %s\n"+levelRow+": %s\n"+rankRow+": %s";
             String texto = String.format(
                 formato, 
-                usuario.getId(), 
+                usuario.getUser(), 
                 usuario.getCountry(), 
                 usuario.getLevel(),
                 usuario.getRank()

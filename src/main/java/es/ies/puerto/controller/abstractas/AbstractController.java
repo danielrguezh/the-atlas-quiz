@@ -242,4 +242,32 @@ public abstract class AbstractController {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Metodo que muestra una pantalla alterna en la aplicacion
+     * @param button
+     * @param fxml
+     * @param usuario datos almacenados en la nueva pantalla
+     */
+    public void mostrarPantalla(Node node, String fxml, UserEntity usuario, String category) {
+        if (node == null || fxml == null || fxml.isEmpty() || usuario == null || category == null || category.isEmpty()) {
+            return;
+        }
+        try {
+            Stage stage = (Stage) node.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(fxml));
+            Scene scene = new Scene(fxmlLoader.load());
+            scene.getStylesheets().add(getClass().getResource("/es/ies/puerto/css/style.css").toExternalForm());
+            Object controller = fxmlLoader.getController();
+            Method method = controller.getClass().getMethod("cargarDatosUsuario", UserEntity.class, String.class);
+            method.invoke(controller, usuario, category); 
+            Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
+            stage.getIcons().add(icon);
+            stage.setTitle("The Atlas Quiz");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

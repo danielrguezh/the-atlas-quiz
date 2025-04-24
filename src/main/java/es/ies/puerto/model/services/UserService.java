@@ -159,7 +159,7 @@ public class UserService extends Conexion{
     }
 
     public boolean updateLevel(int level, String email) throws SQLException {
-        String sql = "UPDATE users SET level = ?, WHERE email = ?";
+        String sql = "UPDATE users SET level = ? WHERE email = ?";
         try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
             sentencia.setInt(1, level);
             sentencia.setString(2, email);
