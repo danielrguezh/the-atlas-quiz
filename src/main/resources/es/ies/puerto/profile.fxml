@@ -2,25 +2,93 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="770.0" prefWidth="350.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.ProfileController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="770.0" prefWidth="350.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.ProfileController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
-      <Text fx:id="textUsuario" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
-      <TextField fx:id="textFieldUsuario" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
-      <Text fx:id="textNombre" layoutX="135.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
-      <TextField fx:id="textFieldNombre" editable="false" layoutX="60.0" layoutY="66.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
-      <Text fx:id="textEmail" layoutX="138.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo Electrónico" />
-      <TextField fx:id="textFieldEmail" editable="false" layoutX="60.0" layoutY="230.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
-      <Text fx:id="textNivel" layoutX="140.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel" />
-      <TextField fx:id="textFieldNivel" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
+      <ImageView fitHeight="241.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@img/banner.png" />
+      </image></ImageView>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="332.0">
+         <children>
+            <ImageView fx:id="userImageView" fitHeight="79.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/user.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="77.0" prefWidth="171.0">
+               <children>
+                  <Text fx:id="textUsuarioMostrar" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario: " wrappingWidth="210.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="textLevel" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel: " wrappingWidth="210.0">
+                     <VBox.margin>
+                        <Insets right="125.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="textRank" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank:" wrappingWidth="210.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button fx:id="openJugarButton" layoutX="130.0" layoutY="506.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openJugarClick" prefHeight="32.0" prefWidth="110.0" text="Capitales">
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/icon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="openJugarButton1" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openJugarClick" prefHeight="32.0" prefWidth="110.0" text="Banderas">
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="openJugarButton2" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openJugarClick" prefHeight="32.0" prefWidth="110.0" text="PIB">
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="openJugarButton3" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openJugarClick" prefHeight="32.0" prefWidth="110.0" text="Poblacion">
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="openJugarButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openJugarClick" prefHeight="32.0" prefWidth="110.0" text="Jugar" />
       <Button fx:id="openEditarButton" layoutX="130.0" layoutY="480.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openEditarClick" prefHeight="32.0" prefWidth="110.0" text="Editar" />
-      <Button fx:id="openJugarButton" layoutX="130.0" layoutY="506.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openJugarClick" prefHeight="32.0" prefWidth="110.0" text="Jugar" />
       <Button fx:id="buttonVolverAtras" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onVolverAtrasClick" prefHeight="32.0" prefWidth="110.0" text="Volver Atrás" />
    </children>
 </VBox>

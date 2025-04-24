@@ -7,7 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
-import es.ies.puerto.model.entities.UsuarioEntitySqlite;
+import es.ies.puerto.model.entities.UserEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -62,7 +62,7 @@ public class LoginController extends AbstractController{
     @FXML
     public void initialize() {
         comboIdioma.getItems().add("es");
-        comboIdioma.getItems().add("en");
+        //comboIdioma.getItems().add("en");
         String idioma = ConfigManager.ConfigProperties.getIdiomaActual();
         comboIdioma.setValue(idioma);
         cargarIdioma(idioma);
@@ -86,7 +86,7 @@ public class LoginController extends AbstractController{
 
     /**
      * Carga el archivo de propiedades del idioma especificado
-     * @param idioma Codigo del idioma a cargar (ej: "es", "en", "fr")
+     * @param idioma Codigo del idioma a cargar (ej: "es", "en")
      */
     private void cargarIdioma(String idioma) {
         String path = pathFichero+ficheroStr+idioma+".properties";
@@ -103,7 +103,7 @@ public class LoginController extends AbstractController{
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorCredencialesVacios"));
             return;
         }
-        List<UsuarioEntitySqlite> usuarios;
+        List<UserEntity> usuarios;
         try {
             usuarios = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textFieldUsuarioEmail.getText());
             if (usuarios == null) { 

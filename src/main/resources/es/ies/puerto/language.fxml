@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -11,17 +12,40 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fitHeight="241.0" fitWidth="246.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@img/banner.png" />
+      </image></ImageView>
+   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@img/icon.png" />
+      </image></ImageView>
    <Text fx:id="textMensaje" strokeType="OUTSIDE" strokeWidth="0.0" text="Select your language / Seleccione su idioma" />
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
       <children>
-         <Button fx:id="buttonEnglish" mnemonicParsing="false" text="English">
+         <Button fx:id="buttonEnglish" mnemonicParsing="false" onAction="#onEnglishButton" prefHeight="43.0" prefWidth="107.0" text="English">
+            <graphic>
+               <ImageView fitHeight="43.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@img/flags/gb.png" />
+                  </image>
+               </ImageView>
+            </graphic>
             <HBox.margin>
                <Insets right="30.0" />
             </HBox.margin>
          </Button>
-         <Button fx:id="buttonSpanish" mnemonicParsing="false" onAction="#onSpanishButton" text="Español" />
+         <Button fx:id="buttonSpanish" mnemonicParsing="false" onAction="#onSpanishButton" prefHeight="43.0" prefWidth="107.0" text="Español">
+            <graphic>
+               <ImageView fitHeight="43.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@img/flags/es.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <HBox.margin>
+               <Insets />
+            </HBox.margin></Button>
       </children>
       <VBox.margin>
          <Insets />

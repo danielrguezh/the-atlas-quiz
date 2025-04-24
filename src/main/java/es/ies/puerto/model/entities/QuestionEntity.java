@@ -10,14 +10,14 @@ public class QuestionEntity {
     String category;
     String description;
     String answer;
-    String rank;
+    Rank rank;
     String rutaImagen;
 
 
     public QuestionEntity() {
     }
 
-    public QuestionEntity(int id, String category, String description, String answer, String rank, String rutaImagen) {
+    public QuestionEntity(int id, String category, String description, String answer, Rank rank, String rutaImagen) {
         this.id = id;
         this.category = category;
         this.description = description;
@@ -58,11 +58,11 @@ public class QuestionEntity {
         this.answer = answer;
     }
 
-    public String getRank() {
+    public Rank getRank() {
         return this.rank;
     }
 
-    public void setRank(String rank) {
+    public void setRank(Rank rank) {
         this.rank = rank;
     }
 

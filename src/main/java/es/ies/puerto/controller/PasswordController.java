@@ -5,7 +5,7 @@ import java.util.List;
 
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
-import es.ies.puerto.model.entities.UsuarioEntitySqlite;
+import es.ies.puerto.model.entities.UserEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -50,7 +50,7 @@ public class PasswordController extends AbstractController{
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEmailVacioNulo"));
             return;
         }
-        List<UsuarioEntitySqlite> email;
+        List<UserEntity> email;
         try {
             email = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textFieldEmail.getText());
             if (email == null) {

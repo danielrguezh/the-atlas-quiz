@@ -4,9 +4,9 @@ import java.lang.reflect.Method;
 
 import es.ies.puerto.PrincipalApplication;
 import es.ies.puerto.config.ConfigManager;
-import es.ies.puerto.model.entities.UsuarioEntitySqlite;
-import es.ies.puerto.model.services.PalabraServiceSqlite;
-import es.ies.puerto.model.services.UsuarioServiceSqlite;
+import es.ies.puerto.model.entities.UserEntity;
+import es.ies.puerto.model.services.QuestionService;
+import es.ies.puerto.model.services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -26,16 +26,16 @@ import javafx.stage.Stage;
 public abstract class AbstractController {
 
     static final String PATH_DB = "src/main/resources/usuarios.db";
-    private UsuarioServiceSqlite usuarioServiceSqlite;
-    private PalabraServiceSqlite palabraServiceSqlite;
+    private UserService usuarioServiceSqlite;
+    private QuestionService questionService;
     
     /**
      * Constructor por defecto
      */
     public AbstractController() {
         try {
-            usuarioServiceSqlite = new UsuarioServiceSqlite(PATH_DB);
-            palabraServiceSqlite = new PalabraServiceSqlite(PATH_DB);
+            usuarioServiceSqlite = new UserService(PATH_DB);
+            questionService =new QuestionService(PATH_DB);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,12 +44,12 @@ public abstract class AbstractController {
     /**
      * Getters and Setters
      */
-    public UsuarioServiceSqlite getUsuarioServiceSqlite() {
+    public UserService getUsuarioServiceSqlite() {
         return usuarioServiceSqlite;
     }
 
-    public PalabraServiceSqlite getPalabraServiceSqlite() {
-        return palabraServiceSqlite;
+    public QuestionService getQuestionService() {
+        return questionService;
     }
 
     @FXML
@@ -205,9 +205,9 @@ public abstract class AbstractController {
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(fxml));
             Scene scene = new Scene(fxmlLoader.load());
             scene.getStylesheets().add(getClass().getResource("/es/ies/puerto/css/style.css").toExternalForm());
-            Image icon = new Image(getClass().getResource("/es/ies/puerto/img/ahorcado.png").toExternalForm());
+            Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
             stage.getIcons().add(icon);
-            stage.setTitle("Juego del ahorcado");
+            stage.setTitle("The Atlas Quiz");
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
@@ -221,7 +221,7 @@ public abstract class AbstractController {
      * @param fxml
      * @param usuario datos almacenados en la nueva pantalla
      */
-    public void mostrarPantalla(Node node, String fxml, UsuarioEntitySqlite usuario) {
+    public void mostrarPantalla(Node node, String fxml, UserEntity usuario) {
         if (node == null || fxml == null || fxml.isEmpty() || usuario == null) {
             return;
         }
@@ -231,11 +231,11 @@ public abstract class AbstractController {
             Scene scene = new Scene(fxmlLoader.load());
             scene.getStylesheets().add(getClass().getResource("/es/ies/puerto/css/style.css").toExternalForm());
             Object controller = fxmlLoader.getController();
-            Method method = controller.getClass().getMethod("cargarDatosUsuario", UsuarioEntitySqlite.class);
+            Method method = controller.getClass().getMethod("cargarDatosUsuario", UserEntity.class);
             method.invoke(controller, usuario); 
-            Image icon = new Image(getClass().getResource("/es/ies/puerto/img/ahorcado.png").toExternalForm());
+            Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
             stage.getIcons().add(icon);
-            stage.setTitle("Juego del Ahorcado");
+            stage.setTitle("The Atlas Quiz");
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {

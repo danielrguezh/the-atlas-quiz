@@ -5,8 +5,8 @@ import java.util.List;
 
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
-import es.ies.puerto.model.entities.UsuarioEntitySqlite;
-import es.ies.puerto.model.services.UsuarioServiceSqlite;
+import es.ies.puerto.model.entities.UserEntity;
+import es.ies.puerto.model.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -36,7 +36,7 @@ public class UsuariosController extends AbstractController{
     private Text textMensaje;
 
     @FXML
-    private ListView<UsuarioEntitySqlite> listViewUsuarios; 
+    private ListView<UserEntity> listViewUsuarios; 
 
     @FXML
     private Button buttonVolverAtras;
@@ -55,25 +55,26 @@ public class UsuariosController extends AbstractController{
      * Configura la visualizacion de la lista de usuarios ListView
      */
     private void configurarListView() {
-        listViewUsuarios.setCellFactory(param -> new ListCell<UsuarioEntitySqlite>() {
+        listViewUsuarios.setCellFactory(param -> new ListCell<UserEntity>() {
         @Override
-        protected void updateItem(UsuarioEntitySqlite usuario, boolean empty) {
+        protected void updateItem(UserEntity usuario, boolean empty) {
             super.updateItem(usuario, empty);
             if (empty || usuario == null) {
                 setText(null);
                 return;
             } 
-            String idRow = ConfigManager.ConfigProperties.getProperty("idRow");
             String usuarioRow = ConfigManager.ConfigProperties.getProperty("usuarioRow");
-            String emailRow = ConfigManager.ConfigProperties.getProperty("emailRow");
-            String nombreRow = ConfigManager.ConfigProperties.getProperty("nombreRow");
-            String formato = ""+idRow+": %s\n"+usuarioRow+": %s\n"+emailRow+": %s\n"+nombreRow+": %s";
+            String countryRow = ConfigManager.ConfigProperties.getProperty("countryRow");
+            String levelRow = ConfigManager.ConfigProperties.getProperty("levelRow");
+            String rankRow = ConfigManager.ConfigProperties.getProperty("rankRow");
+
+            String formato = ""+usuarioRow+": %s\n"+countryRow+": %s\n"+levelRow+": %s\n"+countryRow+": %s";
             String texto = String.format(
                 formato, 
                 usuario.getId(), 
-                usuario.getUser(), 
-                usuario.getEmail(),
-                usuario.getName()
+                usuario.getCountry(), 
+                usuario.getLevel(),
+                usuario.getRank()
                 );
             setText(texto);
             }
@@ -85,9 +86,9 @@ public class UsuariosController extends AbstractController{
      */
     private void cargarUsuarios() {
         try {
-            UsuarioServiceSqlite service = getUsuarioServiceSqlite();
-            List<UsuarioEntitySqlite> listaUsuarios = service.obtenerUsuarios();
-            ObservableList<UsuarioEntitySqlite> usuarios = FXCollections.observableArrayList(listaUsuarios);
+            UserService service = getUsuarioServiceSqlite();
+            List<UserEntity> listaUsuarios = service.obtenerUsuarios();
+            ObservableList<UserEntity> usuarios = FXCollections.observableArrayList(listaUsuarios);
             listViewUsuarios.setItems(usuarios);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -104,7 +105,7 @@ public class UsuariosController extends AbstractController{
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorCredencialesVacios"));
             return;
         }
-        List<UsuarioEntitySqlite> usuariosFiltrados;
+        List<UserEntity> usuariosFiltrados;
         try {
             usuariosFiltrados = getUsuarioServiceSqlite().obtenerUsuarioPorInput(textFieldBuscarUsuario.getText());
             if (usuariosFiltrados == null || usuariosFiltrados.isEmpty()) {
@@ -117,19 +118,6 @@ public class UsuariosController extends AbstractController{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Metodo que redirige a la pantalla de perfil
-     */
-    @FXML
-    protected void onMouseClicked() {
-        UsuarioEntitySqlite usuario = listViewUsuarios.getSelectionModel().getSelectedItem();
-        if (usuario == null) {
-            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorSelecioneUsuario"));
-            return;
-        }
-        mostrarPantalla(listViewUsuarios, "profile.fxml", usuario);
     }
 
     /**

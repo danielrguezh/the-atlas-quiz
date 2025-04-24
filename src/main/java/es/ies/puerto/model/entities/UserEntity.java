@@ -12,18 +12,67 @@ public class UserEntity {
     private String password;
     private String country;
     private int level;
-    private String rank;
+    private Rank rank;
 
-    public UserEntity() {
+    /**
+     * Empty constructor
+     */
+    public UserEntity() {}
+
+
+    public UserEntity(int id) {this.id = id;}
+    
+    public UserEntity(String user) {this.user = user;}
+
+    public UserEntity(String user, String email) {
+        this.user = user;
+        this.email = email;
     }
 
-    public UserEntity(int id, String user, String email, String password, String country, int level) {
+    public UserEntity(String user, String email, String password, String country) {
+        this.id = id;
+        this.user = user;
+        this.email = email;
+        this.password = password;
+        this.country = country;
+    }
+    
+    /**
+     * Constructor sin id
+     * @param user
+     * @param email
+     * @param password
+     * @param country
+     * @param level
+     * @param rank
+     */
+    public UserEntity(String user, String email, String password, String country, int level, Rank rank) {
+        this.user = user;
+        this.email = email;
+        this.password = password;
+        this.country = country;
+        this.level = level;
+        this.rank = rank;
+    }
+
+    /**
+     * Constructor con propiedades
+     * @param id
+     * @param user
+     * @param email
+     * @param password
+     * @param country
+     * @param level
+     * @param rank
+     */
+    public UserEntity(int id, String user, String email, String password, String country, int level, Rank rank) {
         this.id = id;
         this.user = user;
         this.email = email;
         this.password = password;
         this.country = country;
         this.level = level;
+        this.rank = rank;
     }
 
     public int getId() {
@@ -74,6 +123,14 @@ public class UserEntity {
         this.level = level;
     }
 
+    public Rank getRank() {
+        return this.rank;
+    }
+
+    public void setRank(Rank rank) {
+        this.rank = rank;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -82,12 +139,12 @@ public class UserEntity {
             return false;
         }
         UserEntity userEntity = (UserEntity) o;
-        return id == userEntity.id && Objects.equals(user, userEntity.user) && Objects.equals(email, userEntity.email) && Objects.equals(password, userEntity.password) && Objects.equals(country, userEntity.country) && level == userEntity.level;
+        return  Objects.equals(user, userEntity.user) && Objects.equals(email, userEntity.email) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, email, password, country, level);
+        return Objects.hash( user, email);
     }
 
     @Override
@@ -99,7 +156,9 @@ public class UserEntity {
             ", password='" + getPassword() + "'" +
             ", country='" + getCountry() + "'" +
             ", level='" + getLevel() + "'" +
+            ", rank='" + getRank() + "'" +
             "}";
     }
+
 
 }
