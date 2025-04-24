@@ -110,13 +110,13 @@ public class ProfileController extends AbstractController {
 
     @FXML
     protected void onPib() {
-        categoryString="capitales";
+        categoryString="economia";
         selectGame(pibButton);
     }
 
     @FXML
     protected void onPibPC() {
-        categoryString="capitales";
+        categoryString="renta";
         selectGame(pibPCButton);
     }
 

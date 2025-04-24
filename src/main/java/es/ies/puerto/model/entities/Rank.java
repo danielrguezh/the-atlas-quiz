@@ -1,11 +1,11 @@
 package es.ies.puerto.model.entities;
 
 public enum Rank {
-    BEGINNER, //0-3000
-    TOURIST, //3000-6000
-    NOMAD, //6000-9000
-    CARTOGRAPHER, //9000-12000
-    CARTOGRAPH_MASTER; //+12000
+    BEGINNER,
+    TOURIST, 
+    NOMAD,
+    CARTOGRAPHER, 
+    CARTOGRAPH_MASTER;
 
     /**
      * Methot that ranks up
