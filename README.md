@@ -2,12 +2,12 @@
 
 ## Descripción
 
-(Por hacer)
+La aplicación cosiste en un quiz de preguntas de geografía que recompensa al jugador y rangos de ascenso (BEGINNER, TOURIST, NOMAD, CARTOGRAPHER, CARTOGRAPHER) que aumentan la dificultad del juego.
 
 ## Características Principales
 
 - **Autenticación de Usuario**: Los usuarios pueden iniciar sesión o registrarse para guardar su progreso.
-- **Niveles de Dificultad**: Preguntas de diferentes niveles de dificultad (fácil, medio, difícil).
+- **Niveles de Dificultad**: Preguntas de diferentes niveles de dificultad (BEGINNER, TOURIST, NOMAD, CARTOGRAPHER, CARTOGRAPHER).
 - **Interfaz de Usuario Intuitiva**: Diseñada con JavaFX para una experiencia de usuario fluida.
 - **Progreso y Recompensas**: Los jugadores ganan puntos y avanzan de nivel según su desempeño.
 - **Gestión de Errores**: Manejo de intentos fallidos y mensajes de error claros.
