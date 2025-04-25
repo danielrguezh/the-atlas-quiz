@@ -2,8 +2,8 @@ package es.ies.puerto.model.entities;
 
 public enum Rank {
     BEGINNER,
-    TOURIST, 
+    TOURIST,
     NOMAD,
-    CARTOGRAPHER, 
+    CARTOGRAPHER,
     CARTOGRAPH_MASTER;
 }

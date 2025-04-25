@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,6 +24,23 @@ public class PrincipalApplication extends Application {
         Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
         stage.getIcons().add(icon);
         stage.setTitle("The Atlas Quiz");
+
+        Screen screen = Screen.getPrimary();
+        double screenWidth = screen.getVisualBounds().getWidth();
+        double screenHeight = screen.getVisualBounds().getHeight();
+
+        // Calcular el tamaño de la ventana con relación de aspecto 16:9
+        double windowWidth = screenWidth * 0.8; // 80% del ancho de la pantalla
+        double windowHeight = windowWidth * 9 / 16; // Mantener la relación de aspecto 16:9
+
+        // Establecer el tamaño de la ventana
+        stage.setWidth(windowWidth);
+        stage.setHeight(windowHeight);
+
+        // Centrar la ventana en la pantalla
+        stage.setX((screenWidth - windowWidth) / 2);
+        stage.setY((screenHeight - windowHeight) / 2);
+
         stage.setScene(scene);
         stage.show();
     }

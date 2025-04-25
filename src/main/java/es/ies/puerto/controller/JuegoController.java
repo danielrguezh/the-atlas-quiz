@@ -127,7 +127,7 @@ public class JuegoController extends AbstractController{
             if (!preguntas.isEmpty()) {
                 preguntaEntity = preguntas.get(0);
                 if (categoria == "banderas") {
-                    String imagePath = "/" +preguntaEntity.getRutaImagen();
+                    String imagePath = preguntaEntity.getRutaImagen();
                     System.out.println(imagePath);
                     URL imageUrl = getClass().getResource(imagePath);
                     if (imageUrl != null) {
@@ -209,7 +209,7 @@ public class JuegoController extends AbstractController{
                 puntuacion= puntuacion *5;
                 break;
             default:
-                break;    
+                break;
                  
         }
         int newLevel= puntuacion+player.getLevel();
